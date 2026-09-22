@@ -47,14 +47,14 @@ statarb --source csv --pairs-csv pairs.csv --alloc-csv alloc.csv
 ```
 
 ```python
-from statarb import (AllocationConfig, CostModel, PairsConfig,
-                     load_yahoo, run_composite)
+from statarb import AllocationConfig, CostModel, PairsConfig, load_yahoo, run_composite
 
 pairs_px = load_yahoo(["KO", "PEP", "XOM", "CVX", "HD", "LOW"], "2010-01-01")
 alloc_px = load_yahoo(["SPY", "EFA", "EEM", "TLT", "GLD"], "2010-01-01")
 
 res = run_composite(
-    pairs_px, alloc_px,
+    pairs_px,
+    alloc_px,
     PairsConfig(hedge_method="kalman", entry_z=2.0, exit_z=0.5, stop_z=4.0),
     AllocationConfig(method="risk_parity", covariance="ledoit_wolf"),
     tactical_weight=0.3,
